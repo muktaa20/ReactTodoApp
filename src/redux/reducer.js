@@ -24,7 +24,11 @@ const initialState = {
           ...state,
           todos: state.todos.map(todo =>
             todo.id === action.payload
-              ? { ...todo, completed: !todo.completed }
+              ? {
+                  ...todo,
+                  completed: !todo.completed,
+                  completedAt: !todo.completed ? new Date().toLocaleString() : null,
+                }
               : todo
           ),
         };
@@ -39,6 +43,16 @@ const initialState = {
         return {
           ...state,
           theme: state.theme === 'light' ? 'dark' : 'light',
+        };
+  
+      case 'EDIT_TODO':
+        return {
+          ...state,
+          todos: state.todos.map(todo =>
+            todo.id === action.payload.id
+              ? { ...todo, text: action.payload.newText }
+              : todo
+          ),
         };
   
       default:
