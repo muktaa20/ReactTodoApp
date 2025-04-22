@@ -106,7 +106,7 @@ function App() {
             type="submit"
             className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shadow-md flex items-center"
           >
-            <span>Add</span>
+            <span>Add Todo </span>
           </button>
         </form>
 
@@ -188,7 +188,7 @@ function App() {
       </div>
       
       <footer className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-        <p>Made with ❤️ | {new Date().getFullYear()}</p>
+        <p>Made by Mukta Suryawanshi❤️ | {new Date().getFullYear()}</p>
       </footer>
     </div>
   )
@@ -248,7 +248,7 @@ function TodoItem({
           <div
             onClick={() => handleToggleComplete(todo.id)}
             className={`flex-1 cursor-pointer truncate ${
-              todo.completed ? 'line-through text-gray-500 dark:text-gray-400' : ''
+              todo.completed ? ' text-gray-500 dark:text-gray-400' : ''
             }`}
           >
             {todo.text}
@@ -257,14 +257,25 @@ function TodoItem({
       </div>
 
       {todo.completed ? (
-        <span className="text-xs text-green-600 dark:text-green-400 sm:text-sm">
-          Completed: {todo.completedAt}
-        </span>
-      ) : (
-        <span className="text-xs text-yellow-600 dark:text-yellow-400 sm:text-sm">
-          Pending
-        </span>
-      )}
+  <span className="text-xs text-green-600 dark:text-green-400 sm:text-sm">
+    
+    Completed: {new Date(todo.completedAt).toLocaleDateString()}
+
+  </span>
+) : (
+  <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+    <span className="text-xs text-yellow-600 dark:text-yellow-400 sm:text-sm">
+      Pending
+    </span>
+    <button
+      onClick={() => handleToggleComplete(todo.id)}
+      className="px-2 py-1 text-xs sm:text-sm bg-white-100 text-purple-900 rounded hover:bg-white-200 dark:bg-green-800 dark:text-green-300 dark:hover:bg-green-700 transition-colors"
+    >
+      🗸
+    </button>
+  </div>
+)}
+
 
       <div className="flex gap-2 justify-end">
         {editingTodoId === todo.id ? (
@@ -277,7 +288,7 @@ function TodoItem({
             </button>
             <button
               onClick={handleEditCancel}
-              className="px-3 py-1 text-sm text-white bg-gray-500 rounded hover:bg-gray-600 transition-colors"
+              className="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-700 transition-colors"
             >
               Cancel
             </button>
